@@ -24,7 +24,7 @@ public class Merge {
 
     private void doMerge() throws IOException {
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", HadoopNode.HDFS);
+        conf.set("fs.defaultFS", HadoopNode.HDFS_ZK_CHS);
         conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
         FileSystem fsSource = FileSystem.get(URI.create(inputPath.toString()), conf);
         FileSystem fsDst = FileSystem.get(URI.create(outputPath.toString()), conf);

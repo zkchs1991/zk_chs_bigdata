@@ -14,6 +14,7 @@
         <module>bigdata-hbase</module>
         <module>bigdata-hive</module>
         <module>bigdata-spark</module>
+        <module>bigdata-zookeeper</module>
     </modules>
 
     <properties>
@@ -25,6 +26,17 @@
     </properties>
 
     <dependencies>
+
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>bigdata</groupId>
+                <artifactId>bigdata-zookeeper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
