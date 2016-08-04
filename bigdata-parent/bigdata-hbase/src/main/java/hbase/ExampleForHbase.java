@@ -15,8 +15,8 @@ public class ExampleForHbase {
 
     static {
         config = HBaseConfiguration.create();
-        config.set("hbase.rootdir", "hdfs://10.0.11.141:9000/hbase");
-        config.set("hbase.zookeeper.quorum", "10.0.11.141:2181,10.0.11.142:2181,10.0.11.143:2181");
+        config.set("hbase.rootdir", HbaseNode.HBASE_HDFS_PALMAP);
+        config.set("hbase.zookeeper.quorum", HbaseNode.HBASE_ZOOKEEPER_PALMAP);
     }
 
     /**
@@ -453,9 +453,9 @@ public class ExampleForHbase {
 
 
     public static void main(String[] args) throws IOException {
-        String[] family = {"userinfo"};
-        createTable("user1", family);
-
+//        String[] family = {"userinfo"};
+//        createTable("user1", family);
+//
 //        String[] column = {"name", "age", "email", "phone"};
 //        String[] value = {"zhangsan", "22", "zs@163.com", "13111009988"};
 //        String[] value1 = {"lisi", "25", "ls@163.com", "13311009988"};
@@ -464,12 +464,12 @@ public class ExampleForHbase {
 //        addData("rowkey2", "user1", column, value1);
 //        addData("rowkey3", "user1", column, value2);
 
-//        getResult("user1", "rowkey2");
+        getResult("user1", "rowkey2");
 
 //        scanResult("user1");
 //
 //        scanResult("user1", "rowkey1", "rowkey3");
-
+//
 //        getResultByColumn("user1", "rowkey1", "userinfo", "name");
 //        updateTable("user1", "rowkey1", "userinfo", "name", "zs");
 //        getResultByColumn("user1", "rowkey1", "userinfo", "name");
@@ -477,7 +477,7 @@ public class ExampleForHbase {
 //        getResultByVersion("user1", "rowkey1", "userinfo", "name");
 
 //        deleteColumn("user1","rowkey1","userinfo","email");
-
+//
 //        deleteAllColumn("user1","rowkey1");
 
     }
