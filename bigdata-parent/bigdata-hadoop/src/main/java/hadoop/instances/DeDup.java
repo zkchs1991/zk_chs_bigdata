@@ -45,20 +45,18 @@ public class DeDup {
     }
 
     private static class Map extends Mapper<LongWritable,Text,Text,Text>{
-        private static Text line = new Text();//每行数据
-        //实现map函数
+        private static final Text empty = new Text("");
         public void map(LongWritable key,Text value,Context context)
                 throws IOException,InterruptedException{
-            line = value;
-            context.write(line, new Text(""));
+            context.write(value, empty);
         }
     }
 
     private static class Reduce extends Reducer<Text,Text,Text,Text>{
-        //实现reduce函数
+        private static final Text empty = new Text("");
         public void reduce(Text key,Iterable<Text> values,Context context)
                 throws IOException,InterruptedException{
-            context.write(key, new Text(""));
+            context.write(key, empty);
         }
     }
 
