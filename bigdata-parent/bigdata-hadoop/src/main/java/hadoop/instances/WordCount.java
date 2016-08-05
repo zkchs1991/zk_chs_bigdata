@@ -1,6 +1,5 @@
 package hadoop.instances;
 
-import hadoop.HadoopNode;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -15,8 +14,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import static hadoop.HadoopConfig.*;
+
 /**
  * Created by zk_chs on 16/8/5.
+ * 单词计数
  */
 public class WordCount {
 
@@ -24,19 +26,23 @@ public class WordCount {
     private static final Path OUTPUT_PATH = new Path("output/wordcount/");
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        System.setProperty("HADOOP_USER_NAME", "root");
+        System.setProperty(HADOOP_USER_NAME, HADOOP_USER_NAME_VALUE);
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", HadoopNode.HDFS);
-        conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
+        conf.set(DEFAULT_FS, DEFAULT_FS_VALUE);
+        conf.set(HDFS_IMPL, HDFS_IMPL_VALUE);
         Job job = Job.getInstance(conf, "wordCount");
         job.setJarByClass(WordCount.class);
+
         job.setMapperClass(Map.class);
         job.setCombinerClass(Reduce.class);
         job.setReducerClass(Reduce.class);
+
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+
         FileInputFormat.addInputPath(job, INPUT_PATH);
         FileOutputFormat.setOutputPath(job, OUTPUT_PATH);
+
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 

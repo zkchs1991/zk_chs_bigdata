@@ -1,6 +1,6 @@
 package hadoop.api;
 
-import hadoop.HadoopNode;
+import hadoop.HadoopConfig;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 
@@ -24,7 +24,7 @@ public class Merge {
 
     private void doMerge() throws IOException {
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", HadoopNode.HDFS);
+        conf.set("fs.defaultFS", HadoopConfig.DEFAULT_FS_VALUE);
         conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
         FileSystem fsSource = FileSystem.get(URI.create(inputPath.toString()), conf);
         FileSystem fsDst = FileSystem.get(URI.create(outputPath.toString()), conf);
@@ -53,15 +53,17 @@ public class Merge {
         merge.doMerge();
     }
 
+    private static class MyPathFilter implements PathFilter{
+        private String reg = null;
+        MyPathFilter (String reg){
+            this.reg = reg;
+        }
+        @Override
+        public boolean accept(Path path) {
+            return !path.toString().matches(reg);
+        }
+    }
+
 }
 
-class MyPathFilter implements PathFilter{
-    private String reg = null;
-    MyPathFilter (String reg){
-        this.reg = reg;
-    }
-    @Override
-    public boolean accept(Path path) {
-        return !path.toString().matches(reg);
-    }
-}
+

@@ -1,6 +1,6 @@
 package hadoop.api;
 
-import hadoop.HadoopNode;
+import hadoop.HadoopConfig;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -15,7 +15,7 @@ public class Exists {
             System.setProperty("HADOOP_USER_NAME", "root");
             String filename = "test";
             Configuration conf = new Configuration();
-            conf.set("fs.defaultFS", HadoopNode.HDFS);
+            conf.set("fs.defaultFS", HadoopConfig.DEFAULT_FS_VALUE);
             conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
             FileSystem fs = FileSystem.get(conf);
             if (fs.exists(new Path(filename))) {

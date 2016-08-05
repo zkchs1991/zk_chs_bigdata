@@ -1,6 +1,6 @@
 package hadoop.api;
 
-import hadoop.HadoopNode;
+import hadoop.HadoopConfig;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -18,7 +18,7 @@ public class Read {
         try {
             System.setProperty("HADOOP_USER_NAME", "root");
             Configuration conf = new Configuration();
-            conf.set("fs.defaultFS", HadoopNode.HDFS);
+            conf.set("fs.defaultFS", HadoopConfig.DEFAULT_FS_VALUE);
             conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
             FileSystem fs = FileSystem.get(conf);
             Path file = new Path("test");
