@@ -14,27 +14,36 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  * Created by zk_chs on 16/8/5.
  */
 public class WordCount {
 
-    public static final IntWritable ONE = new IntWritable(1);
-    public static class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
+    private static final IntWritable ONE = new IntWritable(1);
+    private static class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
         @Override
         protected void map(LongWritable key, Text value,
                            Mapper<LongWritable, Text, Text, IntWritable>.Context context)
                 throws IOException, InterruptedException {
-            String[] vs = value.toString().split("\\s");//正则表达式，表示通过空格分隔
-            for (String v : vs) {
-                context.write(new Text(v), ONE);
-            }
+            String[] vs = value.toString().split("\\s"); //正则表达式，表示通过空格分隔
+            Stream.of(vs).forEach(addValueToContext(context));
         }
     }
 
+    private static <T extends String> Consumer<T> addValueToContext(Mapper<LongWritable, Text, Text, IntWritable>.Context context){
+        return v -> {
+            try {
+                context.write(new Text(v), ONE);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+    }
 
-    public static  class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
+    private static  class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
         @Override
         protected void reduce(Text key, Iterable<IntWritable> values,
                               Reducer<Text, IntWritable, Text, IntWritable>.Context context) throws IOException, InterruptedException {
