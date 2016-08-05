@@ -1,4 +1,4 @@
-package hadoop.chapter3;
+package hadoop.api;
 
 import hadoop.HadoopNode;
 import org.apache.hadoop.conf.Configuration;

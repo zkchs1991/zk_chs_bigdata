@@ -1,4 +1,4 @@
-package hadoop.demo;
+package hadoop.instances;
 
 /**
  * Created by zk_chs on 16/8/5.
