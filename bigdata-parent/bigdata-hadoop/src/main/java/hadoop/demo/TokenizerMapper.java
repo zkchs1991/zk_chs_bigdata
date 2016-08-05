@@ -12,12 +12,12 @@ import java.util.StringTokenizer;
  */
 public class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 
-    private static final IntWritable one = new IntWritable(1);
+    private static final IntWritable one = new IntWritable(1); //注意这里实列化时要付个1，否则后面的计数会不准确
     private Text word = new Text();
     public void map (Object key, Text value,
                      Context context)
                      throws IOException, InterruptedException {
-        System.out.println("key = " + key.toString());
+        System.out.println("key = " + key.toString()); //添加查看的key值
         System.out.println("value = " + value.toString());
 
         StringTokenizer itr = new StringTokenizer(value.toString());

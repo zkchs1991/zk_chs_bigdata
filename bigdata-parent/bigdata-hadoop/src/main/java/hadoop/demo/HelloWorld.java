@@ -22,13 +22,13 @@ public class HelloWorld {
         conf.set("fs.defaultFS", HadoopNode.HDFS);
         conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
         Job job = Job.getInstance(conf, "word count");
-        job.setJarByClass(HelloWorld.class);
+        job.setJarByClass(HelloWorld.class); //设定作业的启动类
         job.setMapperClass(TokenizerMapper.class);
         job.setCombinerClass(IntSumSumReducer.class);
         job.setReducerClass(IntSumSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-        FileInputFormat.addInputPath(job, new Path("input/zk_in"));
+        FileInputFormat.addInputPath(job, new Path("input/"));
         FileOutputFormat.setOutputPath(job, new Path("output/"));
         System.out.println(job.waitForCompletion(true) ? 0 : 1);
     }
