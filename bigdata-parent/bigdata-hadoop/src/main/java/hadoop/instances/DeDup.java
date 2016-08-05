@@ -32,7 +32,6 @@ public class DeDup {
         job.setJarByClass(DeDup.class);
 
         job.setMapperClass(Map.class);
-        job.setCombinerClass(Reduce.class);
         job.setReducerClass(Reduce.class);
 
         job.setOutputKeyClass(Text.class);
