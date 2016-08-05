@@ -24,7 +24,7 @@ public class Merge {
 
     private void doMerge() throws IOException {
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", HadoopNode.HDFS_ZK_CHS);
+        conf.set("fs.defaultFS", HadoopNode.HDFS);
         conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
         FileSystem fsSource = FileSystem.get(URI.create(inputPath.toString()), conf);
         FileSystem fsDst = FileSystem.get(URI.create(outputPath.toString()), conf);
@@ -48,8 +48,8 @@ public class Merge {
     }
 
     public static void main(String[] args) throws IOException {
-        Merge merge = new Merge("hdfs://192.168.0.177:9000/user/root/input/",
-                                "hdfs://192.168.0.177:9000/user/root/tempwork/merge.txt");
+        Merge merge = new Merge("hdfs://Master:9000/user/root/input/",
+                                "hdfs://Master:9000/user/root/tempwork/merge.txt");
         merge.doMerge();
     }
 

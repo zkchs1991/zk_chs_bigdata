@@ -15,8 +15,8 @@ public class ExampleForHbase {
 
     static {
         config = HBaseConfiguration.create();
-        config.set("hbase.rootdir", HbaseNode.HBASE_HDFS_PALMAP);
-        config.set("hbase.zookeeper.quorum", HbaseNode.HBASE_ZOOKEEPER_PALMAP);
+        config.set("hbase.rootdir", HbaseNode.HBASE_HDFS);
+        config.set("hbase.zookeeper.quorum", HbaseNode.HBASE_ZOOKEEPER);
     }
 
     /**
