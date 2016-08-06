@@ -16,6 +16,7 @@ import static hadoop.HadoopConfig.*;
 
 /**
  * Created by zk_chs on 16/8/6.
+ * 单表关联
  */
 public class STjoin {
 
