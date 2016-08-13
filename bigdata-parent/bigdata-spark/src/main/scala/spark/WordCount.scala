@@ -5,7 +5,7 @@ import org.apache.spark.SparkConf
 
 /**
   * Created by zk_chs on 16/8/13.
-  * spark-submit --class "spark.WordCount"  /root/bigdata-spark-1.0-SNAPSHOT.jar
+  * spark-submit --class "spark.WordCount"  /root/spark-jars/bigdata-spark-1.0-SNAPSHOT.jar
   */
 object WordCount {
 
